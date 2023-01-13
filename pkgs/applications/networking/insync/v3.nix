@@ -13,6 +13,7 @@
 , qtwebchannel
 , qtwebsockets
 , qtlocation
+, qtserialport
 , qtwebengine
 , autoPatchelfHook
 , wrapQtAppsHook
@@ -20,11 +21,11 @@
 
 stdenv.mkDerivation rec {
   pname = "insync";
-  version = "3.3.5.40925";
+  version = "3.8.4.50481";
 
   src = fetchurl {
-    url = "http://s.insynchq.com/builds/${pname}_${version}-focal_amd64.deb";
-    sha256 = "sha256-lYlG/8d7teX98F5eDxm4EdBfFs7Sz3Td4kKLC6KZqnQ=";
+    url = "http://cdn.insynchq.com/builds/linux/${pname}_${version}-jammy_amd64.deb";
+    sha256 = "sha256-jd2/XB9UYhofvI7rDrjCTXtjJyo62JQtPo2t53kTjRs=";
   };
 
   postPatch = ''
@@ -38,6 +39,7 @@ stdenv.mkDerivation rec {
     libxcb
     nss
     qtlocation
+    qtserialport
     qtvirtualkeyboard
     qtwebchannel
     qtwebengine
@@ -54,7 +56,6 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin $out/lib $out/share
     cp -R usr/* $out/
-    rm $out/lib/insync/libGLX.so.0
     rm $out/lib/insync/libQt5*
     sed -i 's|/usr/lib/insync|/lib/insync|' "$out/bin/insync"
     wrapQtApp "$out/lib/insync/insync"
