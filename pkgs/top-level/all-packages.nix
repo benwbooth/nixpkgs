@@ -38399,6 +38399,8 @@ with pkgs;
 
   glom = callPackage ../applications/misc/glom { };
 
+  globus-connect-personal = callPackage ../applications/networking/globus-connect-personal { };
+
   glucose = callPackage ../applications/science/logic/glucose { };
   glucose-syrup = callPackage ../applications/science/logic/glucose {
     enableUnfree = true;
